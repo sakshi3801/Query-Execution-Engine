@@ -57,8 +57,8 @@ employees.insert_many([
 ### 2. Optional: create hash indexes
 
 ```python
-employees.create_index("id")         # Fast lookups by id
-employees.create_index("department") # Fast lookups by department
+employees.create_index("id")
+employees.create_index("department")
 ```
 
 ### 3. Run queries

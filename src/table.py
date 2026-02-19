@@ -1,5 +1,3 @@
-"""In-memory table: structured data with schema and optional indexes."""
-
 from typing import Any, Iterator, List, Optional
 
 from .schema import Schema

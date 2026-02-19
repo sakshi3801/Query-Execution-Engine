@@ -1,2 +1,0 @@
-# In-Memory Query Engine - Python 3.9+
-# No external dependencies; standard library only.

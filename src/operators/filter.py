@@ -1,5 +1,3 @@
-"""Filter operator: applies WHERE predicate to rows from child operator."""
-
 from typing import Any, Iterator, List
 
 from ..ast import BinaryOp, Predicate
@@ -7,7 +5,6 @@ from .base import Operator
 
 
 def _eval_predicate(pred: Predicate, row: List[Any], col_index: dict[str, int]) -> bool:
-    """Evaluate predicate against a row. Row is indexed by column name via col_index."""
     if pred.op in (BinaryOp.EQ, BinaryOp.NE, BinaryOp.LT, BinaryOp.LE, BinaryOp.GT, BinaryOp.GE):
         col = pred.left
         val = pred.right

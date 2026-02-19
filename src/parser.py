@@ -1,5 +1,3 @@
-"""SQL-like query parser: SELECT ... FROM ... WHERE ... into AST."""
-
 import re
 from typing import List, Optional, Tuple
 
@@ -16,7 +14,7 @@ def _tokenize(s: str) -> List[str]:
     """Split query into tokens (keywords, identifiers, literals, operators)."""
     s = s.strip()
     tokens = []
-    # Match: words, numbers, quoted strings, = != < <= > >= ( ) , *
+    
     pattern = r"(?i)\b(SELECT|FROM|WHERE|AND|OR)\b|\*|[a-zA-Z_][a-zA-Z0-9_]*|\d+\.?\d*|'[^']*'|\"[^\"]*\"|[=<>!]=?|[,()]"
     for m in re.finditer(pattern, s):
         tokens.append(m.group(0))
@@ -79,10 +77,6 @@ def _parse_predicate(tokens: List[str], pos: int) -> Tuple[Predicate, int]:
 
 
 def parse(query: str) -> SelectQuery:
-    """Parse a SQL-like query into a SelectQuery AST.
-
-    Supported: SELECT col1, col2 | * FROM table [WHERE col op value [AND|OR ...]]
-    """
     tokens = _tokenize(query)
     if not tokens:
         raise ParseError("Empty query")
@@ -91,7 +85,6 @@ def parse(query: str) -> SelectQuery:
         raise ParseError("Query must start with SELECT")
     pos = 1
 
-    # Parse column list
     columns: List[str] = []
     while pos < len(tokens) and tokens[pos].upper() not in ("FROM",):
         if tokens[pos] == "*":

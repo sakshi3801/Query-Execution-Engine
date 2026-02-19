@@ -1,5 +1,3 @@
-"""Execution planner: converts parsed SelectQuery into an operator tree."""
-
 from typing import Dict, Union
 
 from .ast import SelectQuery
@@ -22,11 +20,9 @@ class Planner:
         table = self.tables[query.table_name]
         schema = table.schema
         col_index = {c.name: i for i, c in enumerate(schema.columns)}
-
-        # Root: full scan or index scan when WHERE is single equality on indexed column
+        
         root = self._build_scan(table, query)
 
-        # Optional filter (full scan + WHERE, or index scan has no extra predicate)
         if query.where is not None and not isinstance(root, IndexScanOperator):
             root = FilterOperator(root, query.where, col_index)
 

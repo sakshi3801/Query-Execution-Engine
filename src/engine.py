@@ -9,15 +9,6 @@ from .table import Table
 
 
 class QueryEngine:
-    """In-memory SQL-like query execution engine.
-
-    Supports:
-    - SELECT col1, col2 | * FROM table [WHERE conditions]
-    - Filtering (WHERE with =, !=, <, <=, >, >=, AND, OR)
-    - Projection (column selection)
-    - Full table scans and hash-based index scans for equality
-    """
-
     def __init__(self) -> None:
         self._tables: Dict[str, Table] = {}
 

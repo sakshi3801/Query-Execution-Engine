@@ -1,5 +1,3 @@
-"""Index scan operator: uses hash index when WHERE has equality on indexed column."""
-
 from typing import Any, Iterator, List
 
 from ..table import Table
@@ -7,8 +5,6 @@ from .base import Operator
 
 
 class IndexScanOperator(Operator):
-    """Produces rows from a table using a hash index for equality filter (e.g. WHERE id = 5)."""
-
     def __init__(self, table: Table, column_name: str, value: Any) -> None:
         self.table = table
         self.column_name = column_name

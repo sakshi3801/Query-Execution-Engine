@@ -23,8 +23,8 @@ class Predicate:
     """A predicate: column op value, or left AND/OR right."""
 
     op: BinaryOp
-    left: Union["Predicate", str, None] = None  # column name or left predicate
-    right: Union[Any, "Predicate", None] = None  # value or right predicate
+    left: Union["Predicate", str, None] = None
+    right: Union[Any, "Predicate", None] = None
 
     def is_equality(self) -> bool:
         return self.op == BinaryOp.EQ
@@ -35,9 +35,7 @@ class Predicate:
 
 @dataclass
 class SelectQuery:
-    """Parsed SELECT ... FROM ... [WHERE ...] query."""
-
-    columns: List[str]  # empty or ["*"] means all columns
+    columns: List[str]
     table_name: str
     where: Optional[Predicate] = None
 
